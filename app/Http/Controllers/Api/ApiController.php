@@ -37,10 +37,19 @@ class ApiController extends Controller
     }
 
     public function order(Request $request) {
+
+        if($request->image) {
+            $name_image_rand = rand(0 , 100000);
+            $fileupload = $request->image;
+            $extention  = $fileupload->getClientOriginalExtension();
+            $path       = $fileupload->move(public_path('images/orders'), 'image_' . time() . $name_image_rand .'.' . $extention);
+            $nameimage = 'image_' . time() . $name_image_rand .  '.' . $extention;
+        }
+
         $order = Order::create([
             'type'          =>$request->type,
             'name'          =>$request->name, 
-            'image'         =>$request->image, 
+            'image'         =>$nameimage,
             'user_add_id'   =>$request->user_id,
         ]);
         return response()->json($order);
