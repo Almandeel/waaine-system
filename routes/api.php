@@ -25,13 +25,13 @@ Route::group([
     'middleware' => 'api',
 ], function ($router) {
     //  Customer Log
-    Route::post('customer/login', 'Api\AuthController@login');
-    Route::post('customer/logout', 'Api\AuthController@logout');
-    Route::post('customer/register', 'Api\AuthController@register');
-    Route::post('customer/refresh', 'Api\AuthController@refresh');
+    Route::post('login', 'Api\AuthController@login');
+    Route::post('logout', 'Api\AuthController@logout');
+    Route::post('register', 'Api\AuthController@register');
+    Route::post('refresh', 'Api\AuthController@refresh');
 
     // halls route
-    Route::post('customer/halls', 'Api\ApiController@halls');
-    Route::post('customer/hall', 'Api\ApiController@hall');
-    Route::post('customer/order', 'Api\ApiController@order');
+    Route::post('halls', 'Api\ApiController@halls');
+    Route::post('hall', 'Api\ApiController@hall');
+    Route::post('order', 'Api\ApiController@order');
 });
