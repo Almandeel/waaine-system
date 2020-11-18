@@ -30,7 +30,6 @@ class AuthController extends Controller
         $user = User::create([
             'name'      => $request['name'],
             'phone'     => $request['phone'],
-            'address' => $request['address'],
             'password'  => Hash::make($request['password']),
             'fcm_token' => $request['fcm_token'],
         ]);
@@ -40,7 +39,6 @@ class AuthController extends Controller
             $dealer = Dealer::create([
                 'name' => $request['name'],
                 'phone' => $request['phone'],
-                'address' => $request['address'],
             ]);
 
             $user->update([

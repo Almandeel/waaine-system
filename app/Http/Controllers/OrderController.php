@@ -12,9 +12,21 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->type == "deactive") {
+            $orders = Order::where('status', 0)->get();
+        }
+
+        if($request->type == "done") {
+            $orders = Order::where('status', 1)->get();
+        }
+
+        else {
+            $orders = Order::where('status', 0)->get();
+        }
+
+        return view('dashboard.orders.index', compact('orders'));
     }
 
     /**
@@ -46,7 +58,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('dashboard.orders.show', compact('order'));
     }
 
     /**

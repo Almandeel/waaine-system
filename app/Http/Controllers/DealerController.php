@@ -14,7 +14,8 @@ class DealerController extends Controller
      */
     public function index()
     {
-        //
+        $dealers = Dealer::all();
+        return view('dashboard.dealers.index', compact('dealers'));
     }
 
     /**

@@ -13,49 +13,9 @@
         <div class="card-header">
             طلب رقم {{ $order->id }}
 
-            @permission('orders-print')
+            {{-- @permission('orders-print')
                 <a href="{{ route('reports.order', $order->id) }}" target="_blank" class="btn btn-secondary btn-sm float-left">طباعة</a>
-            @endpermission
-
-            @if($order->status == \App\Order::ORDER_DEFAULT)
-                @permission('orders-update')
-                <form class="float-left" style="display: inline-block; margin:0 1%" action="{{ route('orders.update', $order->id) }}?type=accepted" method="post">
-                    @csrf 
-                    @method('PUT')
-                    <button type="submit" class="btn btn-success btn-sm">
-                        <i class="fa fa-check"> موافقة</i>
-                    </button>
-                </form>
-                @endpermission
-            @endif
-
-            @role('company')
-                @if($order->status == \App\Order::ORDER_ACCEPTED && !in_array(auth()->user()->company_id, $tenders))
-                        <button type="button" class="btn btn-success btn-sm float-left" data-toggle="modal" data-target="#TenderyModal">
-                            <i class="fa fa-check"> استلام الطلب</i>
-                        </button>
-                @endif
-
-                @if($order->status == \App\Order::ORDER_IN_ROAD)
-                    <form style="display: inline-block; float:left" action="{{ route('orders.update', $order->id) }}?type=road" method="post">
-                        @csrf 
-                        @method('PUT')
-                        <button type="submit" class="btn btn-success btn-sm">
-                            <i class="fa fa-check"> تم توصيل الطلب </i>
-                        </button>
-                    </form>
-                @endif
-
-                @if($order->status == \App\Order::ORDER_IN_SHIPPING)
-                    <form style="display: inline-block; float:left" action="{{ route('orders.update', $order->id) }}?type=shipping" method="post">
-                        @csrf 
-                        @method('PUT')
-                        <button type="submit" class="btn btn-success btn-sm">
-                            <i class="fa fa-check"> تم شحن الطلب </i>
-                        </button>
-                    </form>
-                @endif
-            @endrole
+            @endpermission --}}
 
         </div>
         <div class="card-body">
@@ -66,99 +26,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @role(['superadmin', 'services'])
-                        <tr>
-                            <th>اسم العميل</th>
-                            <td>{{ $order->name }}</td>
-                            <th>رقم الهاتف</th>
-                            <td>{{ $order->phone }}</td>
-                        </tr>
-                    @endrole
                     <tr>
-                        <th>نوع الشحن</th>
-                        <td>{{ $order->type }}</td>
-                        <th>تاريخ الاضافة</th>
-                        <td>{{ $order->created_at->format('Y-m-d H:I') }}</td>
+                        <th>اسم العميل</th>
+                        <td>{{ $order->customer->name }}</td>
+                        <th>رقم الهاتف</th>
+                        <td>{{ $order->customer->phone }}</td>
                     </tr>
                     <tr>
-                        <th>منطقة الشحن</th>
-                        <td>{{ $order->from }}</td>
-                        <th>منطقة التفريغ</th>
-                        <td>{{ $order->to }}</td>
+                        <th>نوع الطلب</th>
+                        <td>{{ \App\Order::STATUS[$order->type] }}</td>
+                        <th>اسم الطلب</th>
+                        <td>{{ $order->name }}</td>
                     </tr>
-                    @role(['superadmin', 'services'])
-                        <tr>
-                            <th>شركة الشحن</th>
-                            <td>{{ $order->company->name ?? '' }}</td>
-                            <th>رقم هاتف الشركة</th>
-                            <td>{{ $order->company->phone ?? '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>تاريخ التسليم</th>
-                            <td>{{ $order->received_at }}</td>
-                            <th>تاريخ التوصيل</th>
-                            <td>{{ $order->delivered_at }}</td>
-                        </tr>
-                    @endrole
-
-                    @if(auth()->user()->hasRole(['superadmin', 'services']))
-                        <tr>
-                            <th>اسم المخلص</th>
-                            <td>{{ $order->savior_name }}</td>
-                            <th>رقم هاتف المخلص</th>
-                            <td>{{ $order->savior_phone }}</td>
-                        </tr>
-                    @else 
-                        @if($order->status != \App\Order::ORDER_DEFAULT && $order->status != \App\Order::ORDER_ACCEPTED)
-                            <tr>
-                                <th>اسم المخلص</th>
-                                <td>{{ $order->savior_name }}</td>
-                                <th>رقم هاتف المخلص</th>
-                                <td>{{ $order->savior_phone }}</td>
-                            </tr>
-                        @endif
-                    @endif
-                    <tr >
-                        <th colspan="2">تاريخ الشحن</th>
-                        <td colspan="2">{{ $order->shipping_date }}</td>
+                    <tr>
+                        <th>اسم التاجر</th>
+                        <td>{{ $order->dealer->name ?? '-' }}</td>
+                        <th>رقم الهاتف</th>
+                        <td>{{ $order->dealer->phone ?? '-' }}</td>
                     </tr>
-                    
-                    @permission('pricings-read')
-                        <tr>
-                            <th>سعر التوصيل</th>
-                            <td>{{ $order->amount }}</td>
-                            <th>العمولة</th>
-                            <td>{{ $order->net }}</td>
-                        </tr>
-                    @endpermission
-                    
+                    <tr>
+                        <th>عنوان التاجر</th>
+                        <td>{{ $order->dealer->address ?? '-' }}</td>
+                    </tr>
                 </tbody>
             </table>
 
+            <div>
+                <label for="">صورة الطلب</label>
+                <img style="width: 100%" src="{{ asset('images/orders/' . $order->image) }}" alt="">
+            </div>
 
-            <table class="table table-bordered table-hover text-center">
-                <thead>
-                    <tr><th colspan="4">تفاصيل الطلب</th></tr>
-                    <tr>
-                        <th>#</th>
-                        <th>النوع</th>
-                        <th>العدد</th>
-                        <th>الوزن</th>
-                    </tr>
-                </thead>
-                @foreach ($order->items as $index=>$item)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $item->type }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->weight }}</td>
-                    </tr>
-                @endforeach
-            </table>
-
-            @if(in_array($order->status, [\App\Order::ORDER_DEFAULT, \App\Order::ORDER_ACCEPTED]))
             @role(['superadmin', 'customer', 'services'])
-                <table class="table table-bordered table-hover text-center">
+                {{-- <table class="table table-bordered table-hover text-center">
                     <thead>
                         <tr><th colspan="5">افضل العروض</th></tr>
                         <tr>
@@ -191,9 +90,8 @@
                             </td>
                         </tr>
                     @endforeach
-                </table>
+                </table> --}}
             @endrole
-            @endif
         </div>
         <div class="card-footer">
             

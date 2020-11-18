@@ -9,16 +9,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile', 'UserController@profile')->name('users.profile');
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
-    Route::resource('units', 'UnitController');
-    Route::resource('zones', 'ZoneController');
-    Route::resource('vehicles', 'VehicleController');
     Route::resource('orders', 'OrderController');
-    Route::resource('companies', 'CompanyController');
-    Route::resource('pricings', 'PricingController');
-    Route::resource('payments', 'PaymentController');
-
-    Route::get('reports/order/{id}', 'ReportController@order')->name('reports.order');
-    Route::get('json/orders', 'OrderController@orders');
+    Route::resource('dealers', 'DealerController');
+    Route::resource('halls', 'HallController');
 });
 
 Auth::routes(['register' => false]);

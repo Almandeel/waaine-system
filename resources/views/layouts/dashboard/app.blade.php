@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title> ترحيل | @yield('title') </title>
+    <title> وين | @yield('title') </title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -45,7 +45,7 @@
         }
 
         .navbar-white {
-            background-color: #e33113;
+            background-color: rgb(89, 81, 135);
         }
 
         aside {
@@ -57,7 +57,7 @@
         }
 
         .nav-item .nav-link.active {
-            background-color: #e33113 !important;
+            background-color: rgb(89, 81, 135) !important;
             color: #fff
         }
         
@@ -67,7 +67,7 @@
         }
 
         .layout-navbar-fixed .wrapper .sidebar-light-primary .brand-link:not([class*=navbar]) {
-            background-color: #e33113;
+            background-color: rgb(89, 81, 135);
             color: #fff;
             text-align: center;
         }
@@ -108,7 +108,7 @@
     
             <!-- Main Footer -->
             <footer class="main-footer">
-                <strong>كل الحقوق محفوظة لشركة ترحيل</strong>
+                <strong>   </strong>
                 <div class="float-left d-none d-sm-inline-block">
                     <b>Version</b> 1.0.0
                 </div>
