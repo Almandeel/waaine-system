@@ -36,7 +36,23 @@ class HallController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request_data = $request->except('image');
+
+        if($request->image) {
+            $name_image_rand = rand(0 , 100000);
+            $fileupload = $request->image;
+            $extention  = $fileupload->getClientOriginalExtension();
+            $path       = $fileupload->move(public_path('images/halls'), 'image_' . time() . $name_image_rand .'.' . $extention);
+            $nameimage = 'image_' . time() . $name_image_rand .  '.' . $extention;
+        }
+        $request_data['image'] = $nameimage;
+
+        $hall = Hall::create($request_data);
+        
+        session()->flash('success', 'تمت العملية بنجاح');
+
+        return back();
     }
 
     /**

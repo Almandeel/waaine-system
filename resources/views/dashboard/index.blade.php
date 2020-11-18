@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-md-6 col-sm-6 col-12">
-            <div class="info-box bg-success">
+            <div class="info-box bg-info">
                 <span class="info-box-icon"><i class="far far fa-thumbs-up"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">الطلبات المكتملة</span>

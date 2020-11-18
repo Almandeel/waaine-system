@@ -20,7 +20,6 @@ class CreateHallsTable extends Migration
             $table->text('address')->nullable();
             $table->text('phone')->nullable();
             $table->text('location')->nullable();
-            $table->string('map_location')->nullable();
             $table->text('description')->nullable();
             $table->enum('type', [1,2])->nullable();
             $table->timestamps();

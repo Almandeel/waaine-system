@@ -10,7 +10,7 @@
                         <h4 class="modal-title" id="hallModalLabel">اضافة فندق</h4>
                     @endif
                 </div>
-                <form id="form_hall" action="{{ route('halls.store') }}" method="post">
+                <form id="form_hall" action="{{ route('halls.store') }}" method="post" enctype="multipart/form-data">
                     @csrf 
                     <div class="modal-body">
 
@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <label>خط الطول و العرض</label>
-                            <input type="text" class="form-control" name="map_location" placeholder="خط الطول و العرض" required>
+                            <input type="text" class="form-control" name="location" placeholder="خط الطول و العرض" required>
                         </div>
 
                         <div class="form-group">
@@ -45,6 +45,8 @@
                             <label>الوصف</label>
                             <textarea cols="5" rows="5" class="form-control" name="description" placeholder="الوصف" required></textarea>
                         </div>
+
+                        <input type="hidden" name="type" value="{{ request()->type }}">
 
                     </div>
                     <div class="modal-footer">
