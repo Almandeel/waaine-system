@@ -30,8 +30,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label>خط الطول و العرض</label>
-                            <input type="text" class="form-control" name="location" placeholder="خط الطول و العرض" required>
+                            <label>خط الطول  </label>
+                            <input type="text" class="form-control" name="longitude" placeholder="خط الطول " required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>خط العرض</label>
+                            <input type="text" class="form-control" name="latitude" placeholder="خط العرض" required>
                         </div>
 
                         <div class="form-group">
@@ -67,14 +72,20 @@ $('.hall').click(function() {
         $('#form_hall').attr('action', $(this).data('action'))
         $('#form_hall').append('<input type="hidden" name="_method" value="PUT">')
 
-        $('.modal-title').text('تعديل شركة')
+        @if(request()->type == 1)
+            $('.modal-title').text('تعديل صالة')
+        @else 
+            $('.modal-title').text('تعديل فندق')
+
+        @endif
 
         //set data to inputs
         $('#form_hall input[name="name"]').val($(this).data('name'))
         $('#form_hall input[name="phone"]').val($(this).data('phone'))
         $('#form_hall input[name="address"]').val($(this).data('address'))
         $('#form_hall textarea[name="description"]').val($(this).data('description'))
-        $('#form_hall input[name="map_location"]').val($(this).data('map_location'))
+        $('#form_hall input[name="longitude"]').val($(this).data('longitude'))
+        $('#form_hall input[name="latitude"]').val($(this).data('latitude'))
 
     }else {
         $('#form_items').attr('action', '{{ route("halls.store") }}' )
@@ -89,6 +100,8 @@ $('.hall').click(function() {
         $('#form_hall input[name="name"]').val('')
         $('#form_hall input[name="phone"]').val('')
         $('#form_hall input[name="address"]').val('')
+        $('#form_hall input[name="longitude"]').val('')
+        $('#form_hall input[name="latitude"]').val('')
     }
 
             

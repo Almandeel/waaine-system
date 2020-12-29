@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('phone');
+            $table->string('address')->nullable();
             $table->string('password', 64);
             $table->string('fcm_token', 255)->nullable();
             $table->unsignedBigInteger('dealer_id')->nullable();

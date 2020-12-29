@@ -134,4 +134,7 @@ class CustomerController extends Controller
         return response()->json(['message' => 'success'], 200);
     }
 
+
+    
+
 }

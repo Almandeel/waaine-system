@@ -23,12 +23,14 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
 
 Route::group([
     'middleware' => 'api',
+    'prefix' => 'customer',
 ], function ($router) {
     //  Customer Log
     Route::post('login', 'Api\AuthController@login');
     Route::post('logout', 'Api\AuthController@logout');
     Route::post('register', 'Api\AuthController@register');
     Route::post('refresh', 'Api\AuthController@refresh');
+    Route::post('profile', 'Api\AuthController@profile');
 
     // halls route
     Route::post('halls', 'Api\ApiController@halls');

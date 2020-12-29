@@ -13,21 +13,5 @@ class AppSeeder extends Seeder
     public function run()
     {
 
-        Hall::create([
-            'name'          => "data",
-            'image'         => "data",
-            'location'      => "data",
-            'description'   => "data",
-            'type'          => 1,
-        ]);
-
-        Hall::create([
-            'name'          => "data", 
-            'image'         => "data", 
-            'location'      => "data", 
-            'description'   => "data", 
-            'type'          => 2,
-        ]);
-
     }
 }

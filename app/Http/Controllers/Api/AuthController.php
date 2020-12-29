@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -22,10 +23,18 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'phone' => 'required | unique:users',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'name'              => 'required | string | max:45',
+            'phone'             => 'required | string | max:255 | unique:users',
+            'password'          => 'required | string',
+            'fcm_token'         => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->messages(),
+            ]);
+        }
 
         $user = User::create([
             'name'      => $request['name'],
@@ -37,8 +46,9 @@ class AuthController extends Controller
         if($request->type == 'dealer') {
 
             $dealer = Dealer::create([
-                'name' => $request['name'],
-                'phone' => $request['phone'],
+                'name'      => $request['name'],
+                'phone'     => $request['phone'],
+                'address'   => $request['address'],
             ]);
 
             $user->update([
@@ -89,7 +99,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function profile()
     {
         return response()->json(auth('api')->user());
     }
