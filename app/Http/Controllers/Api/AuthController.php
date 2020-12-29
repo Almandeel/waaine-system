@@ -28,6 +28,7 @@ class AuthController extends Controller
             'phone'             => 'required | string | max:255 | unique:users',
             'password'          => 'required | string',
             'fcm_token'         => 'required',
+            'trade_type'        => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -41,6 +42,7 @@ class AuthController extends Controller
             'phone'     => $request['phone'],
             'password'  => Hash::make($request['password']),
             'fcm_token' => $request['fcm_token'],
+            'trade_type' => $request['trade_type'],
         ]);
 
         if($request->type == 'dealer') {

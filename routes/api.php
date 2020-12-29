@@ -33,7 +33,11 @@ Route::group([
     Route::post('profile', 'Api\AuthController@profile');
 
     // halls route
+    Route::post('store/order', 'Api\ApiController@StoreOrder');
+    Route::post('get/orders', 'Api\ApiController@getorders');
+    Route::post('get/order', 'Api\ApiController@getorder');
+    Route::post('tender', 'Api\ApiController@tender');
+
     Route::post('halls', 'Api\ApiController@halls');
     Route::post('hall', 'Api\ApiController@hall');
-    Route::post('order', 'Api\ApiController@order');
 });

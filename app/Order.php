@@ -30,4 +30,8 @@ class Order extends Model
         return $this->belongsTo('App\User', 'user_accepted_id');
     }
 
+    public function tendres() {
+        return $this->hasMany('App\OrderTender');
+    }
+
 }

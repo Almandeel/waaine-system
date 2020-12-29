@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 64);
             $table->string('fcm_token', 255)->nullable();
             $table->unsignedBigInteger('dealer_id')->nullable();
+            $table->enum('trade_type', [1,2,3])->nullable();
             $table->tinyInteger('status')->default(1);
             $table->unique(["phone"], 'username_UNIQUE');
             $table->timestamps();
