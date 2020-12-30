@@ -41,3 +41,18 @@ Route::group([
     Route::post('halls', 'Api\ApiController@halls');
     Route::post('hall', 'Api\ApiController@hall');
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'dealer',
+], function ($router) {
+    //  Customer Log
+    Route::post('login', 'Api\AuthController@login');
+    Route::post('logout', 'Api\AuthController@logout');
+    Route::post('register', 'Api\AuthController@register');
+    Route::post('refresh', 'Api\AuthController@refresh');
+    Route::post('profile', 'Api\AuthController@profile');
+
+    // halls route
+    
+});

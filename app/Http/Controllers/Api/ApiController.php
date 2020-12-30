@@ -106,7 +106,8 @@ class ApiController extends Controller
         $order = Order::where('id', $tender->order_id)->first();
 
         $order->update([
-            'status' => 1
+            'status' => 1,
+            'user_accepted_id' => $tender->dealer->user->id,
         ]);
 
         $recipients = $tender->dealer->user->pluck('fcm_token')->toArray();

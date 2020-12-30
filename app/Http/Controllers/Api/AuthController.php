@@ -28,7 +28,6 @@ class AuthController extends Controller
             'phone'             => 'required | string | max:255 | unique:users',
             'password'          => 'required | string',
             'fcm_token'         => 'required',
-            'trade_type'        => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -42,7 +41,6 @@ class AuthController extends Controller
             'phone'     => $request['phone'],
             'password'  => Hash::make($request['password']),
             'fcm_token' => $request['fcm_token'],
-            'trade_type' => $request['trade_type'],
         ]);
 
         if($request->type == 'dealer') {
@@ -55,10 +53,11 @@ class AuthController extends Controller
 
             $user->update([
                 'dealer_id' => $dealer->id,
+                'trade_type' => $request['trade_type'],
             ]);
         }
 
-        $user->attachRole('customers');
+        // $user->attachRole('customers');
 
         $credentials = request(['phone', 'password']);
 

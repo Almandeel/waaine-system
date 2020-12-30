@@ -21,7 +21,7 @@ class Order extends Model
         'type' ,'name', 'image', 'dealer_id', 'user_add_id', 'user_accepted_id', 'amount', 'status'
     ];
 
-    public function customer() {
+    public function user() {
         return $this->belongsTo('App\User', 'user_add_id');
     }
 
