@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class DealerController extends Controller
 {
-    public function GetOrders(Request $request) {
+    public function NewOrders(Request $request) {
         $orders = Order::where('type', auth('api')->user()->trade_type)->where('status', 0)->get();
         return response()->json($orders);
     }

@@ -53,6 +53,9 @@ Route::group([
     Route::post('refresh', 'Api\AuthController@refresh');
     Route::post('profile', 'Api\AuthController@profile');
 
-    // halls route
-    
+    //  routes
+    Route::post('new/orders', 'Api\DealerController@NewOrders');
+    Route::post('get/order', 'Api\DealerController@GetOrder');
+    Route::post('tender', 'Api\DealerController@tender');
+    Route::post('accept/orders', 'Api\DealerController@GetAcceptOrders');
 });
