@@ -58,7 +58,7 @@ class DealerController extends Controller
     }
 
     public function GetAcceptOrders(Request $request) {
-        $orders = Order::where('user_accepted_id', $request->user_id)->get();
+        $orders = Order::where('user_accepted_id', auth('api')->user()->id)->get();
         return response()->json($orders);
     }
 }
