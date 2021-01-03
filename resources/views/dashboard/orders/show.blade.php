@@ -28,13 +28,13 @@
                 <tbody>
                     <tr>
                         <th>اسم العميل</th>
-                        <td>{{ $order->customer->name }}</td>
+                        <td>{{ $order->user->name }}</td>
                         <th>رقم الهاتف</th>
-                        <td>{{ $order->customer->phone }}</td>
+                        <td>{{ $order->user->phone }}</td>
                     </tr>
                     <tr>
                         <th>نوع الطلب</th>
-                        <td>{{ \App\Order::STATUS[$order->type] }}</td>
+                        <td>@lang('orders.' . \App\Order::STATUS[$order->type])</td>
                         <th>اسم الطلب</th>
                         <td>{{ $order->name }}</td>
                     </tr>
@@ -53,10 +53,10 @@
 
             <div>
                 <label for="">صورة الطلب</label>
-                <img style="width: 100%" src="{{ asset('images/orders/' . $order->image) }}" alt="">
+                <img style="width: 50%" src="{{ asset('images/orders/' . $order->image) }}" alt="">
             </div>
 
-            @role(['superadmin', 'customer', 'services'])
+            @role(['superadmin', 'user', 'services'])
                 {{-- <table class="table table-bordered table-hover text-center">
                     <thead>
                         <tr><th colspan="5">افضل العروض</th></tr>

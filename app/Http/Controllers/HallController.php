@@ -63,7 +63,7 @@ class HallController extends Controller
      */
     public function show(Hall $hall)
     {
-        //
+        return view('dashboard.halls.show', compact('hall'));
     }
 
     /**
@@ -86,7 +86,25 @@ class HallController extends Controller
      */
     public function update(Request $request, Hall $hall)
     {
-        //
+        $request_data = $request->except('image');
+
+        if($request->image) {
+            if(file_exists(public_path('images/halls/' . $hall->image))) {
+                unlink(public_path('images/halls/' . $hall->image));
+            }
+            $name_image_rand = rand(0 , 100000);
+            $fileupload = $request->image;
+            $extention  = $fileupload->getClientOriginalExtension();
+            $path       = $fileupload->move(public_path('images/halls'), 'image_' . time() . $name_image_rand .'.' . $extention);
+            $nameimage = 'image_' . time() . $name_image_rand .  '.' . $extention;
+        }
+        $request_data['image'] = $nameimage;
+
+        $hall->update($request_data);
+        
+        session()->flash('success', 'تمت العملية بنجاح');
+
+        return back();
     }
 
     /**

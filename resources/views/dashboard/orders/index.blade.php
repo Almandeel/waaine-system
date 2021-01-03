@@ -13,13 +13,11 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title float-right">قائمة الطلبات</h3>
-            @if(!auth()->user()->hasRole('company'))
             {{-- @permission('orders-create')
                 <a  href="{{ route('orders.create') }}" style="display:inline-block; margin-left:1%" class="btn btn-primary btn-sm float-left">
                     <i class="fa fa-plus"> اضافة</i>
                 </a>
             @endpermission --}}
-            @endif
         </div>
         <div id="app" class="card-body">
                 <table style="width:100%" id="datatable" class="table table-bordered table-hover text-center">
@@ -39,9 +37,9 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->type }}</td>
-                            <td>{{ $order->customer->name }}</td>
-                            <td>{{ $order->customer->phone }}</td>
+                            <td> @lang('orders.' . \App\Order::STATUS[$order->type]) </td>
+                            <td>{{ $order->user->name }}</td>
+                            <td>{{ $order->user->phone }}</td>
                             <td>{{ $order->created_at->format('Y-m-d H:I') }}</td>
                             <td>
                                 @permission('orders-read')

@@ -42,13 +42,13 @@
                         <div class="form-group">
                             <label class="btn btn-primary btn-block">
                                 الصورة
-                                <input type="file" class="form-control d-none" name="image"  required>
+                                <input type="file" class="form-control d-none" name="image"  >
                             </label>
                         </div>
 
                         <div class="form-group">
                             <label>الوصف</label>
-                            <textarea cols="5" rows="5" class="form-control" name="description" placeholder="الوصف" required></textarea>
+                            <textarea cols="5" rows="5" class="form-control" name="description" placeholder="الوصف" ></textarea>
                         </div>
 
                         <input type="hidden" name="type" value="{{ request()->type }}">

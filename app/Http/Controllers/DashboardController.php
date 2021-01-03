@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Bill;
-use App\User;
 use App\Order;
-use App\Driver;
-use App\Market;
-use App\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,6 +16,8 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('dashboard.index');
+        $order_new = Order::whereStatus(0)->count();
+        $order_done = Order::whereStatus(1)->count();
+        return view('dashboard.index', compact('order_done', 'order_new'));
     }
 }

@@ -1,13 +1,13 @@
-@extends('layouts.dashboard.app', ['datatable' => true, 'modals' => ['payment']])
+@extends('layouts.dashboard.app')
 
 @section('title')
-    الشركات  | كشف حساب
+    @if($hall->type == 1) الصالات@else الفنادق@endif
 @endsection
 
 @section('content')
     @component('partials._breadcrumb')
-        @slot('title', ['الشركات', 'كشف حساب'])
-        @slot('url', [route('companies.index'), '#'])
+        @slot('title', [$hall->type == 1  ?  'الصالات' : 'الفنادق', 'عرض'])
+        @slot('url', [route('halls.index') . "?type=" . $hall->type, '#'])
         @slot('icon', ['list', 'eye'])
     @endcomponent
     <div class="card">
@@ -16,50 +16,28 @@
                 <thead>
                     <tr>
                         <th>الاسم</th>
-                        <td>{{ $company->name }}</td>
-                        <th>رقم الهاتف</th>
-                        <td>{{ $company->phone }}</td>
-                        <th>مدين</th>
-                        <td>{{ number_format($debt) }}</td>
-                        <th>دائن</th>
-                        <td>{{ number_format($cridet) }}</td>
-                        <th>الصافي</th>
-                        <td>{{ number_format($cridet - $debt) }}</td>
+                        <td>{{ $hall->name }}</td>
+                        <th>العنوان</th>
+                        <td>{{ $hall->address }}</td>
                     </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            @permission('payments-create')
-                <button  href="#" style="display:inline-block; margin-left:1%" class="btn btn-primary btn-sm pull-left payment" data-company="{{ $company->id }}" data-toggle="modal" data-target="#paymentModal">
-                    <i class="fa fa-user-plus"> اضافة دفعة</i>
-                </button>
-            @endpermission
-        </div>
-        <div class="card-body">
-            <table id="datatable" class="table table-bordered table-hover text-center">
-                <thead>
                     <tr>
-                        <th>#</th>
-                        <th>القيمة</th>
-                        <th>التفاصيل</th>
-                        <th>التاريخ</th>
+                        <th>رقم الهاتف</th>
+                        <td>{{ $hall->phone }}</td>
+                        <th>الوصف</th>
+                        <td>{{ $hall->description }}</td>
+                    </tr>
+                    <tr>
+                        <th>خط الطول</th>
+                        <td>{{ $hall->longitude }}</td>
+                        <th>خط العرض</th>
+                        <td>{{ $hall->latitude }}</td>
+                    </tr>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($enteries as $index=>$entry)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $entry->amount }}</td>
-                            <td>{{ $entry->details }}</td>
-                            <td>{{ $entry->created_at->format('Y-m-d') }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
             </table>
+            <div class="mt-5 text-center">
+                <img style="width: 100%" src="{{ asset('images/halls/' . $hall->image) }}" alt="">
+            </div>
         </div>
     </div>
 @endsection
