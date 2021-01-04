@@ -45,7 +45,7 @@
         }
 
         .navbar-white {
-            background-color: rgb(89, 81, 135);
+            background-color: #112f3d;
         }
 
         aside {
@@ -57,7 +57,7 @@
         }
 
         .nav-item .nav-link.active {
-            background-color: rgb(89, 81, 135) !important;
+            background-color: #112f3d !important;
             color: #fff
         }
         
@@ -67,7 +67,7 @@
         }
 
         .layout-navbar-fixed .wrapper .sidebar-light-primary .brand-link:not([class*=navbar]) {
-            background-color: rgb(89, 81, 135);
+            background-color: #112f3d;
             color: #fff;
             text-align: center;
         }

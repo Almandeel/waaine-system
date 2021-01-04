@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-12">
             <a href="{{ route('orders.index') }}?type=deactive">
-                <div class="info-box bg-info">
+                <div  class="info-box bg-info">
                     <span class="info-box-icon"><i class="fa fa-list"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">الطلبات الجديدة</span>
