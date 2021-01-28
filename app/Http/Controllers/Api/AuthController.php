@@ -23,12 +23,24 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name'              => 'required | string | max:45',
-            'phone'             => 'required | string | max:255 | unique:users',
-            'password'          => 'required | string',
-            'fcm_token'         => 'required',
-        ]);
+        if($request->type == 'dealer') {
+            $validator = Validator::make($request->all(), [
+                'name'              => 'required | string | max:45',
+                'phone'             => 'required | string | max:255 | unique:users',
+                'password'          => 'required | string',
+                'fcm_token'         => 'required',
+                'address'           => 'required',
+                'trade_type'        => 'required',
+            ]);
+        }else {
+            $validator = Validator::make($request->all(), [
+                'name'              => 'required | string | max:45',
+                'phone'             => 'required | string | max:255 | unique:users',
+                'password'          => 'required | string',
+                'fcm_token'         => 'required',
+            ]);
+        }
+        
 
         if ($validator->fails()) {
             return response()->json([
@@ -52,8 +64,9 @@ class AuthController extends Controller
             ]);
 
             $user->update([
-                'dealer_id' => $dealer->id,
-                'trade_type' => $request['trade_type'],
+                'dealer_id'     => $dealer->id,
+                'trade_type'    => $request['trade_type'],
+                'status'        => 0,
             ]);
         }
 
