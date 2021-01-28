@@ -35,7 +35,7 @@
                             <td>{{ $dealer->name }}</td>
                             <td>{{ $dealer->phone }}</td>
                             <td>{{ $dealer->address }}</td>
-                            <td>@lang('orders.' . \App\Order::STATUS[$dealer->user->trade_type])</td>
+                            <td>${{$dealer->user->trade_type ? __('orders.' . \App\Order::STATUS[$dealer->user->trade_type]) : '-'}}</td>
                             {{-- <td>
                                 @permission('enteries-read')
                                     <a href="{{ route('dealers.show', $dealer->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-list"></i> كشف حساب</a>
