@@ -18,6 +18,8 @@ class CreateDealersTable extends Migration
             $table->string("name");
             $table->string("phone");
             $table->string("address")->nullable();
+            $table->string("longitude")->nullable();
+            $table->string("latitude")->nullable();
             $table->timestamps();
         });
     }

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.app', ['datatable' => true])
+@extends('layouts.dashboard.app', ['datatable' => true, 'modals' => ['dealer']])
 
 @section('title')
     التجار
@@ -12,11 +12,11 @@
     @endcomponent
     <div class="card">
         <div class="card-header">
-            {{-- @permission('dealers-create')
-                <button  href="#" style="display:inline-block; margin-left:1%" class="btn btn-primary btn-sm pull-left dealer" data-toggle="modal" data-target="#dealerModal">
+            @permission('dealers-create')
+                <button style="display:inline-block; margin-left:1%" class="btn btn-primary btn-sm pull-right dealer" data-toggle="modal" data-target="#DealerModal">
                     <i class="fa fa-user-plus"> اضافة</i>
                 </button>
-            @endpermission --}}
+            @endpermission
         </div>
         <div class="card-body">
             <table id="datatable" class="table table-bordered table-hover text-center">
@@ -26,7 +26,7 @@
                         <th>رقم الهاتف</th>
                         <th>العنوان</th>
                         <th>نوع التجارة</th>
-                        {{-- <th>خيارات</th> --}}
+                        <th>خيارات</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,14 +36,14 @@
                             <td>{{ $dealer->phone }}</td>
                             <td>{{ $dealer->address }}</td>
                             <td>{{$dealer->user ? __('orders.' . \App\Order::STATUS[$dealer->user->trade_type]) : '-'}}</td>
-                            {{-- <td>
+                            <td>
                                 @permission('enteries-read')
-                                    <a href="{{ route('dealers.show', $dealer->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-list"></i> كشف حساب</a>
+                                    <a href="{{ route('dealers.show', $dealer->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-list"></i> عرض</a>
                                 @endpermission
                                 @permission('dealers-update')
-                                    <button class="btn btn-warning btn-xs dealer update " data-toggle="modal" data-target="#dealerModal" data-action="{{ route('dealers.update', $dealer->id) }}" data-name="{{ $dealer->name }}" data-phone="{{ $dealer->phone }}" data-address="{{ $dealer->address }}"><i class="fa fa-edit"></i> تعديل </button>
+                                    <button class="btn btn-warning btn-xs dealer update " data-toggle="modal" data-target="#DealerModal" data-action="{{ route('dealers.update', $dealer->id) }}" data-name="{{ $dealer->name }}" data-longitude="{{ $dealer->longitude }}" data-latitude="{{ $dealer->latitude }}" data-phone="{{ $dealer->phone }}" data-address="{{ $dealer->address }}"><i class="fa fa-edit"></i> تعديل </button>
                                 @endpermission
-                            </td> --}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

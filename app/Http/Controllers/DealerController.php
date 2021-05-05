@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dealer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DealerController extends Controller
 {
@@ -36,7 +37,27 @@ class DealerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'              => 'required | string | max:45',
+            'phone'             => 'required | string | max:255 | unique:users',
+        ]);
+
+        $request_data = $request->all();
+
+        $dealer = Dealer::create($request_data);
+
+        $dealer->user()->create([
+            'name' =>   $dealer->name,
+            'phone' =>  $dealer->phone,
+            'address' =>$dealer->address,
+            'password' => Hash::make(12345678),
+            'status' => 1,
+            'trade_type' =>$request->trade_type,
+        ]);
+        
+        session()->flash('success', 'تمت العملية بنجاح');
+
+        return back();
     }
 
     /**
@@ -70,7 +91,25 @@ class DealerController extends Controller
      */
     public function update(Request $request, Dealer $dealer)
     {
-        //
+        $request->validate([
+            'name'              => 'required | string | max:45',
+            'phone'             => 'required | string | max:255 | unique:users,phone,' . $dealer->user->id,
+        ]);
+
+        $request_data = $request->all();
+
+        $dealer->update($request_data);
+
+        $dealer->user->update([
+            'name' =>   $dealer->name,
+            'phone' =>  $dealer->phone,
+            'address' =>$dealer->address,
+            'trade_type' =>$request->trade_type,
+        ]);
+        
+        session()->flash('success', 'تمت العملية بنجاح');
+
+        return back();
     }
 
     /**

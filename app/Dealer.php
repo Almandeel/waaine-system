@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dealer extends Model
 {
     protected $fillable = [
-        'name', 'phone', 'address'
+        'name', 'phone', 'address', 'latitude', 'longitude'
     ];
 
     public function user() {
