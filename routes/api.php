@@ -46,7 +46,7 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'dealer',
 ], function ($router) {
-    //  Customer Log
+    //  dealer Log
     Route::post('login', 'Api\AuthController@login');
     Route::post('logout', 'Api\AuthController@logout');
     Route::post('register', 'Api\AuthController@register');

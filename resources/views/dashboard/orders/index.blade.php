@@ -13,11 +13,11 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title float-right">قائمة الطلبات</h3>
-            {{-- @permission('orders-create')
+            @permission('orders-create')
                 <a  href="{{ route('orders.create') }}" style="display:inline-block; margin-left:1%" class="btn btn-primary btn-sm float-left">
                     <i class="fa fa-plus"> اضافة</i>
                 </a>
-            @endpermission --}}
+            @endpermission
         </div>
         <div id="app" class="card-body">
                 <table style="width:100%" id="datatable" class="table table-bordered table-hover text-center">
