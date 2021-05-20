@@ -167,9 +167,9 @@
     <script type="application/javascript">
         $(function () {
             $('#datatable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
