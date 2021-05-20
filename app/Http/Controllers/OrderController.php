@@ -17,15 +17,15 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if($request->type == "deactive") {
-            $orders = Order::where('status', 0)->paginate();
+            $orders = Order::where('status', 0)->orderBy('created_at' , 'DESC')->paginate();
         }
 
         if($request->type == "done") {
-            $orders = Order::where('status', 1)->paginate();
+            $orders = Order::where('status', 1)->orderBy('created_at' , 'DESC')->paginate();
         }
 
         else {
-            $orders = Order::where('status', 0)->paginate();
+            $orders = Order::where('status', 0)->orderBy('created_at' , 'DESC')->paginate();
         }
 
         return view('dashboard.orders.index', compact('orders'));
