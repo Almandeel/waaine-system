@@ -97,8 +97,8 @@ class HallController extends Controller
             $extention  = $fileupload->getClientOriginalExtension();
             $path       = $fileupload->move(public_path('images/halls'), 'image_' . time() . $name_image_rand .'.' . $extention);
             $nameimage = 'image_' . time() . $name_image_rand .  '.' . $extention;
+            $request_data['image'] = $nameimage;
         }
-        $request_data['image'] = $nameimage;
 
         $hall->update($request_data);
         

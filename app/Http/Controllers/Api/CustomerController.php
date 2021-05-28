@@ -98,26 +98,24 @@ class CustomerController extends Controller
 
     public function updateOrder(Request $request) {
         $order = Order::find($request->order_id);
-        $pricing = Pricing::first();
+        // $pricing = Pricing::first();
 
-        $net = ($order->tenders->where('company_id', $request->company_id)->first()->price * $pricing->amount) / 100;
+        // $net = ($order->tenders->where('company_id', $request->company_id)->first()->price * $pricing->amount) / 100;
 
         $order->update([
-            'status'        => Order::ORDER_IN_SHIPPING,
+            'status'        => 1,
             'company_id'    => $request->company_id,
             'received_at'   => date('Y-m-d H:I'),
             'amount' => $order->tenders->where('company_id', $request->company_id)->first()->price,
-            'ratio'  => $pricing->amount,
-            'net'    => $net,
         ]);
 
-        $entries = Entery::create([
-            'amount'    => $net,
-            'from_id'   => $order->company->account_id,
-            'to_id'     => Account::ACCOUNT_SAFE,
-            'details'   => 'عمولة من الطلب رقم ' . $order->id,
-            'type'      => Entery::TYPE_INCOME,
-        ]);
+        // $entries = Entery::create([
+        //     'amount'    => $net,
+        //     'from_id'   => $order->company->account_id,
+        //     'to_id'     => Account::ACCOUNT_SAFE,
+        //     'details'   => 'عمولة من الطلب رقم ' . $order->id,
+        //     'type'      => Entery::TYPE_INCOME,
+        // ]);
 
         $recipients = $order->company->user->pluck('fcm_token')->toArray();
 
