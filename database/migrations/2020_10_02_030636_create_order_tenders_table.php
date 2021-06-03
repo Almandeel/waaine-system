@@ -20,6 +20,11 @@ class CreateOrderTendersTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->double('price')->nullable();
             $table->text('description')->nullable();
+            $table->string('dealer_name')->nullable();
+            $table->string('dealer_phone')->nullable();
+            $table->string('dealer_location')->nullable();
+
+
             $table->foreign('order_id')->references('id')->on('orders')
                 ->onUpdate('cascade')->onDelete('cascade');
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Dealer;
 use App\Order;
 use App\OrderTender;
 use Illuminate\Http\Request;
@@ -34,10 +35,15 @@ class DealerController extends Controller
             ]);
         }
 
+        $dealer = Dealer::find($request->dealer_id);
+
         $tender = OrderTender::create([
             'order_id'        => $request->order_id,
             'dealer_id'       => $request->dealer_id,
             'price'           => $request->price,
+            'dealer_name'           => $dealer->name,
+            'dealer_phone'           => $dealer->phone,
+            'dealer_location'           => $dealer->address,
         ]);
 
         $order = Order::find($request->order_id);
