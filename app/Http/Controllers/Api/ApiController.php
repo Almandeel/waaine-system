@@ -45,6 +45,7 @@ class ApiController extends Controller
             'name'              => 'string | max:100',
             'user_add_id'       => 'required',
             'type'              => 'required',
+            'image'              => 'nullable | max:2024',
         ]);
 
         if ($validator->fails()) {

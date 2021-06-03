@@ -44,6 +44,7 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), [
             'name'              => 'string | max:100',
             'type'              => 'required',
+            'image'              => 'nullable | max:2024',
         ]);
 
 
