@@ -23,7 +23,7 @@ class CreateOrderTendersTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->foreign('dealer_id')->references('id')->on('dealers')
+            $table->foreign('dealer_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
