@@ -7,6 +7,7 @@ use App\Order;
 use App\OrderTender;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 
 class DealerController extends Controller
@@ -35,15 +36,15 @@ class DealerController extends Controller
             ]);
         }
 
-        $dealer = Dealer::find($request->dealer_id);
+        $user = User::find($request->dealer_id);
 
         $tender = OrderTender::create([
             'order_id'        => $request->order_id,
             'dealer_id'       => $request->dealer_id,
             'price'           => $request->price,
-            'dealer_name'           => $dealer->name,
-            'dealer_phone'           => $dealer->phone,
-            'dealer_location'           => $dealer->address,
+            'dealer_name'           => $user->dealer->name,
+            'dealer_phone'           => $user->dealer->phone,
+            'dealer_location'           => $user->dealer->address,
         ]);
 
         $order = Order::find($request->order_id);
