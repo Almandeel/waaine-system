@@ -69,7 +69,7 @@
                             <a href="{{ route('halls.index') }}?type=1" class="nav-link ">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
-                                    الصالات
+                                    الفنادق
                                 </p>
                             </a>
                         </li>
@@ -80,7 +80,7 @@
                             <a href="{{ route('halls.index') }}?type=2" class="nav-link ">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
-                                    الفنادق
+                                    الصالات
                                 </p>
                             </a>
                         </li>

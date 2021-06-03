@@ -40,6 +40,13 @@
                                 @permission('enteries-read')
                                     <a href="{{ route('dealers.show', $dealer->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-list"></i> عرض</a>
                                 @endpermission
+                                @permission('users-update')
+                                    <form style="display:inline-block" action="{{ route('users.update', $dealer->user->id) }}?type=status" method="post">
+                                        @csrf 
+                                        @method('PUT')
+                                        <button class="btn btn-{{ $dealer->user->status ? 'danger' : 'success' }} btn-xs" type="submit"><i class="fa fa-{{ $dealer->user->status ? 'times' : 'check' }}"></i> {{$dealer->user->status ? 'الغاء التفعيل' : 'تفعيل' }} </a>
+                                    </form>
+                                @endpermission
                                 @permission('dealers-update')
                                     <button class="btn btn-warning btn-xs dealer update " data-toggle="modal" data-target="#DealerModal" data-action="{{ route('dealers.update', $dealer->id) }}" data-name="{{ $dealer->name }}" data-longitude="{{ $dealer->longitude }}" data-latitude="{{ $dealer->latitude }}" data-phone="{{ $dealer->phone }}" data-address="{{ $dealer->address }}"><i class="fa fa-edit"></i> تعديل </button>
                                 @endpermission
@@ -48,6 +55,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $dealers->links() }}
         </div>
     </div>
 @endsection

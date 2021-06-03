@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', '!=', auth()->user()->id)->get();
+        $users = User::where('id', '!=', auth()->user()->id)->where('dealer_id' , null)->paginate();
         return view('dashboard.users.index',compact('users'));
     }
 

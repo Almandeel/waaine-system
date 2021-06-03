@@ -5,9 +5,9 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     @if(request()->type == 1)
-                        <h4 class="modal-title" id="hallModalLabel">اضافة صالة</h4>
-                    @else 
                         <h4 class="modal-title" id="hallModalLabel">اضافة فندق</h4>
+                    @else 
+                        <h4 class="modal-title" id="hallModalLabel">اضافة صالة</h4>
                     @endif
                 </div>
                 <form id="form_hall" action="{{ route('halls.store') }}" method="post" enctype="multipart/form-data">
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label class="btn btn-primary btn-block">
                                 الصورة
-                                <input type="file" class="form-control d-none" name="image"  >
+                                <input type="file" class="form-control d-none" name="image">
                             </label>
                         </div>
 
@@ -73,9 +73,9 @@ $('.hall').click(function() {
         $('#form_hall').append('<input type="hidden" name="_method" value="PUT">')
 
         @if(request()->type == 1)
-            $('.modal-title').text('تعديل صالة')
-        @else 
             $('.modal-title').text('تعديل فندق')
+        @else 
+            $('.modal-title').text('تعديل صالة')
 
         @endif
 
@@ -90,9 +90,9 @@ $('.hall').click(function() {
     }else {
         $('#form_items').attr('action', '{{ route("halls.store") }}' )
         @if(request()->type == 1)
-            $('.modal-title').text('اضافة صالة')
-        @else 
             $('.modal-title').text('اضافة فندق')
+        @else 
+            $('.modal-title').text('اضافة صالة')
 
         @endif
         

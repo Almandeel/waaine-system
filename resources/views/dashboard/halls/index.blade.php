@@ -2,18 +2,18 @@
 
 @section('title')
     @if(request()->type == 1)
-        الصالات
-    @else 
         الفنادق
+    @else 
+        الصالات
     @endif
 @endsection
 
 @section('content')
     @component('partials._breadcrumb')
         @if(request()->type == 1)
-            @slot('title', ['الصالات'])
-        @else 
             @slot('title', ['الفنادق'])
+        @else 
+            @slot('title', ['الصالات'])
         @endif
         @slot('url', ['#'])
         @slot('icon', ['list'])

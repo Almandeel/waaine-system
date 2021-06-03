@@ -15,7 +15,7 @@ class DealerController extends Controller
      */
     public function index()
     {
-        $dealers = Dealer::all();
+        $dealers = Dealer::paginate();
         return view('dashboard.dealers.index', compact('dealers'));
     }
 

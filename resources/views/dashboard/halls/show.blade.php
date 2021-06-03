@@ -1,12 +1,12 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-    @if($hall->type == 1) الصالات@else الفنادق@endif
+    @if($hall->type == 1) الفنادق@else الصالات@endif
 @endsection
 
 @section('content')
     @component('partials._breadcrumb')
-        @slot('title', [$hall->type == 1  ?  'الصالات' : 'الفنادق', 'عرض'])
+        @slot('title', [$hall->type == 1  ?  'الفنادق' : 'الصالات', 'عرض'])
         @slot('url', [route('halls.index') . "?type=" . $hall->type, '#'])
         @slot('icon', ['list', 'eye'])
     @endcomponent

@@ -36,6 +36,9 @@ class HallController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'image' => 'required'
+        ]);
         
         $request_data = $request->except('image');
 
