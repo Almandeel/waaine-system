@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class DealerController extends Controller
 {
     public function NewOrders(Request $request) {
-        $orders = Order::where('type', auth('api')->user()->trade_type)->where('status', 0)->get();
+        $orders = Order::where('type', auth('api')->user()->trade_type)->where('status', 0)->orderBy('created_at' , 'DESC')->get();
         return response()->json($orders);
     }
 
@@ -42,9 +42,9 @@ class DealerController extends Controller
             'order_id'        => $request->order_id,
             'dealer_id'       => $request->dealer_id,
             'price'           => $request->price,
-            'dealer_name'           => $user->dealer->name,
+            'dealer_name'            => $user->dealer->name,
             'dealer_phone'           => $user->dealer->phone,
-            'dealer_location'           => $user->dealer->address,
+            'dealer_location'        => $user->dealer->address,
         ]);
 
         $order = Order::find($request->order_id);
