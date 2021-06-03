@@ -118,6 +118,14 @@ class HallController extends Controller
      */
     public function destroy(Hall $hall)
     {
-        //
+        if(file_exists(public_path('images/halls/' . $hall->image))) {
+            unlink(public_path('images/halls/' . $hall->image));
+        }
+
+        $hall->delete();
+
+        session()->flash('success', 'تمت العملية بنجاح');
+
+        return back();
     }
 }

@@ -50,6 +50,14 @@
                                 @permission('halls-update')
                                     <button class="btn btn-warning btn-xs hall update " data-toggle="modal" data-target="#hallModal" data-action="{{ route('halls.update', $hall->id) }}" data-name="{{ $hall->name }}" data-longitude="{{ $hall->longitude }}" data-latitude="{{ $hall->latitude }}" data-phone="{{ $hall->phone }}" data-address="{{ $hall->address }}"><i class="fa fa-edit"></i> تعديل </button>
                                 @endpermission
+
+                                @permission('halls-delete')
+                                <form style="display:inline-block;" action="{{ route('halls.destroy', $hall->id) }}?type=status" method="post">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-xs" style="margin:0 5px" type="submit"><i class="fa fa-edit"></i> حذف </a>
+                                </form>
+                                @endpermission
                             </td>
                         </tr>
                     @endforeach
