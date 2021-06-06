@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Order;
+use App\Events\NewOrder;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\NewOrderNotification;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -66,6 +70,12 @@ class OrderController extends Controller
             ]);
         }
 
+        broadcast(new NewOrder($order));
+
+        $users = User::wherePermissionIs(['delete-orders', 'update-orders'])->get();
+
+        Notification::send($users, new NewOrderNotification($order));
+
         $recipients = User::where('trade_type', $request->type)->get()->pluck('fcm_token')->toArray();
 
         fcm() 
@@ -76,7 +86,9 @@ class OrderController extends Controller
             'title' => 'طلب جديد',
             'body' => 'تم اضافة طلب جديد',
         ])
-        ->send();
+        ->send(); 
+
+        return redirect()->route('orders.show' , $order->id)->with('success', 'تمت العملية بنجاح');
     }
 
     /**

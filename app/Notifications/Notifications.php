@@ -2,14 +2,12 @@
 
 namespace App\Notifications;
 
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-
-class NewOrderNotification extends Notification
+class Notifications extends Notification
 {
     use Queueable;
 
@@ -18,10 +16,9 @@ class NewOrderNotification extends Notification
      *
      * @return void
      */
-    public $order;
-    public function __construct($order)
+    public function __construct()
     {
-        $this->order = $order;
+        dd("dsfjskdfj");
     }
 
     /**
@@ -33,7 +30,6 @@ class NewOrderNotification extends Notification
     public function via($notifiable)
     {
         return ['database', 'broadcast'];
-        // return [WebPushChannel::class];
     }
 
     /**
@@ -45,9 +41,7 @@ class NewOrderNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'body' => 'تم اضافة طلب جديد',
-            'action_url' => '/orders' . '/'. $this->order->id ,
-            'created' => Carbon::now()->toIso8601String()
+            'tit' => 'test'
         ];
     }
 }

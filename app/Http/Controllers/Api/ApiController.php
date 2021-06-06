@@ -11,9 +11,12 @@ use App\Order;
 use App\Vehicle;
 use App\OrderItem;
 use App\OrderTender;
+use App\Events\NewOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\NewOrderNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ApiController extends Controller
 {
@@ -71,6 +74,12 @@ class ApiController extends Controller
                 'image' => $nameimage,
             ]);
         }
+
+        broadcast(new NewOrder($order));
+
+        $users = User::wherePermissionIs(['delete-orders', 'update-orders'])->get();
+
+        Notification::send($users, new NewOrderNotification($order));
 
         $recipients = User::where('trade_type', $request->type)->get()->pluck('fcm_token')->toArray();
 

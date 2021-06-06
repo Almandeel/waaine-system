@@ -11,12 +11,23 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
+
+      <notification-component></notification-component>
+
+
+
       <li class="nav-item">
         <a class="nav-link " href="#" role="button" data-toggle="modal" data-target="#profileModal"><i class="fa fa-user"></i></a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link logout" href="#" role="button"><i class="fa fa-power-off"></i></a>
       </li>
+
+    </ul>
+
+    <ul class="nav navbar-nav">
+      
     </ul>
 
     <!-- SEARCH FORM -->

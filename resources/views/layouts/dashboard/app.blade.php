@@ -81,7 +81,7 @@
 
 <body  class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
-    <div id="app">
+    <div  id="app" >
 
         <div class="wrapper">
     
@@ -286,6 +286,9 @@
             @endforeach
         });
     </script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
 
 
 

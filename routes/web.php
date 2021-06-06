@@ -12,6 +12,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('orders', 'OrderController');
     Route::resource('dealers', 'DealerController');
     Route::resource('halls', 'HallController');
+
+    //notifications 
+    Route::get('notifications', 'NotificationController@index');
 });
 
 Auth::routes(['register' => false]);

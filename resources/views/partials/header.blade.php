@@ -83,5 +83,5 @@
   @stack('head')
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body id="app" class="hold-transition sidebar-mini">
   <div class="wrapper">
