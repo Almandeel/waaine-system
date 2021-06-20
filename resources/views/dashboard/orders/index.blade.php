@@ -40,7 +40,7 @@
                             <td> @lang('orders.' . \App\Order::STATUS[$order->type]) </td>
                             <td>{{ $order->user->name }}</td>
                             <td>{{ $order->user->phone }}</td>
-                            <td>{{ $order->created_at->format('Y-m-d H:I') }}</td>
+                            <td>{{ $order->created_at }}</td>
                             <td>
                                 @permission('orders-read')
                                     <a  href="{{ route('orders.show', $order->id) }}" class="btn btn-default btn-sm">

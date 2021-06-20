@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -32,6 +33,12 @@ class Order extends Model
 
     public function tendres() {
         return $this->hasMany('App\OrderTender');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        // info($value);
+        return $value = Carbon::parse($value)->format('Y-m-d H:i');
     }
 
 }

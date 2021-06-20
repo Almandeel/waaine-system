@@ -14,10 +14,8 @@ use App\OrderTender;
 use App\Events\NewOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\orderRecource;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\NewOrderNotification;
-use App\Notifications\TestNotitication;
 use Illuminate\Support\Facades\Notification;
 
 class ApiController extends Controller
@@ -80,8 +78,8 @@ class ApiController extends Controller
         broadcast(new NewOrder($order));
 
         $users = User::wherePermissionIs(['delete-orders', 'update-orders'])->get();
-        info($users);
-        Notification::send($users, new TestNotitication($order));
+
+        Notification::send($users, new NewOrderNotification($order));
 
         $recipients = User::where('trade_type', $request->type)->get()->pluck('fcm_token')->toArray();
 
@@ -94,21 +92,18 @@ class ApiController extends Controller
             'body' => 'تم اضافة طلب جديد',
         ])
         ->send();
-        
-        return new orderRecource($order);
-        // return response()->json($order);
+
+        return response()->json($order);
     }
 
     public function GetOrders(Request $request) {
         $orders = Order::where('user_add_id', $request->user_id)->orderBy('created_at' , 'DESC')->get();
-        // return response()->json($orders);
-        return new orderRecource($orders);
+        return response()->json($orders);
     }
 
     public function GetOrder(Request $request) {
         $order = Order::with('tendres')->where('id', $request->order_id)->first();
-        // return response()->json($order);
-        return new orderRecource($order);
+        return response()->json($order);
     }
 
     public function tender(Request $request) {

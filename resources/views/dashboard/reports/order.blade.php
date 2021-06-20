@@ -227,7 +227,7 @@
                 <th>نوع الشحن</th>
                 <td>{{ $order->type }}</td>
                 <th>تاريخ الاضافة</th>
-                <td>{{ $order->created_at->format('Y-m-d H:I') }}</td>
+                <td>{{ $order->created_at }}</td>
             </tr>
             <tr>
                 <th>منطقة الشحن</th>
