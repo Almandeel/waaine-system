@@ -120,7 +120,7 @@ class ApiController extends Controller
             'user_accepted_id' => $tender->dealer_id,
         ]);
 
-        $recipients = $tender->pluck('fcm_token')->toArray();
+        $recipients = $tender->dealer->user->pluck('fcm_token')->toArray();
 
         fcm() 
         ->to($recipients)
