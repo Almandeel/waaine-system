@@ -7,6 +7,7 @@ use App\Order;
 use App\OrderTender;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\orderRecource;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,12 +15,13 @@ class DealerController extends Controller
 {
     public function NewOrders(Request $request) {
         $orders = Order::where('type', auth('api')->user()->trade_type)->where('status', 0)->orderBy('created_at' , 'DESC')->get();
-        return response()->json($orders);
+        return new orderRecource($orders);
+        // return response()->json($orders);
     }
 
     public function GetOrder(Request $request) {
         $order = Order::where('id', $request->order_id)->first();
-        return response()->json($order);
+        return new orderRecource($order);
     }
 
     public function tender(Request $request) {
@@ -51,7 +53,7 @@ class DealerController extends Controller
 
         $recipients = $order->user->pluck('fcm_token')->toArray();
 
-        fcm() 
+        fcm()
         ->to($recipients)
         ->priority('high')
         ->timeToLive(0)
