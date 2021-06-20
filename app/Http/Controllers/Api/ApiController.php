@@ -97,7 +97,7 @@ class ApiController extends Controller
     }
 
     public function GetOrders(Request $request) {
-        $orders = Order::where('user_add_id', $request->user_id)->orderBy('created_at' , 'DESC')->get();
+        $orders = Order::whereStatus('0')->where('user_add_id', $request->user_id)->orderBy('created_at' , 'DESC')->get();
         return response()->json($orders);
     }
 
