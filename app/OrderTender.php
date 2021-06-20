@@ -11,6 +11,6 @@ class OrderTender extends Model
     ];
 
     public function dealer() {
-        return $this->belongsTo('App\Dealer', 'dealer_id');
+        return $this->belongsTo('App\User', 'dealer_id');
     }
 }
