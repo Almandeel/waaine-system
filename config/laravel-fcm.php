@@ -7,6 +7,6 @@ return [
      * Change to yours
      */
 
-    'server_key' => 'AAAATNsGQiM:APA91bHfXvNXp-dJGeKcOGCmgbSv4nY42QC0LtDvotZTkWuz1dYPqcu0T7m0ba5aw8RIxWGvWvxim7qBxw1C5msqKRWxYTj9aITLCynL13hxpUPkacYmUvKC4E_O9B1x_eLu3zCN16Ma',
+    'server_key' => 'AAAAgFa0Aes:APA91bFohAX78uDkRaEuYY4nfngRT58-3wQzNsPYlle95oaFY-LwuDTc-5YHR4GSTty8CC0SadgiTTMpZE6oW25NoSSVAPD01xNRVEaaWU5s15u-0RgycJlpOpRwpsg8bRhQFCZxLGWm01:03',
 
 ];

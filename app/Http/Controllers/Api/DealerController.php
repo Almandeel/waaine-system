@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Dealer;
 use App\Order;
 use App\OrderTender;
 use Illuminate\Http\Request;
@@ -12,12 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class DealerController extends Controller
 {
-    public function NewOrders(Request $request) {
+    public function newOrders(Request $request) {
         $orders = Order::where('type', auth('api')->user()->trade_type)->where('status', 0)->orderBy('created_at' , 'DESC')->get();
         return response()->json($orders);
     }
 
-    public function GetOrder(Request $request) {
+    public function getOrder(Request $request) {
         $order = Order::where('id', $request->order_id)->first();
         return response()->json($order);
     }
@@ -64,7 +63,7 @@ class DealerController extends Controller
         return response()->json(['message' => 'تم اضافة العرض']);
     }
 
-    public function GetAcceptOrders(Request $request) {
+    public function getAcceptOrders(Request $request) {
         $orders = Order::where('user_accepted_id', auth('api')->user()->id)->get();
         return response()->json($orders);
     }

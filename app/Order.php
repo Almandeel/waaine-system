@@ -37,7 +37,6 @@ class Order extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        // info($value);
         return $value = Carbon::parse($value)->format('Y-m-d H:i');
     }
 

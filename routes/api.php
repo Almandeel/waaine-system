@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['middleware' => 'auth:api'], function ($router) {
-    
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 });
 
 Route::group([
@@ -33,7 +33,7 @@ Route::group([
     Route::post('profile', 'Api\AuthController@profile');
 
     // halls route
-    Route::post('store/order', 'Api\ApiController@StoreOrder');
+    Route::post('store/order', 'Api\ApiController@storeOrder');
     Route::post('get/orders', 'Api\ApiController@getorders');
     Route::post('get/order', 'Api\ApiController@getorder');
     Route::post('tender', 'Api\ApiController@tender');
@@ -54,8 +54,8 @@ Route::group([
     Route::post('profile', 'Api\AuthController@profile');
 
     //  routes
-    Route::post('new/orders', 'Api\DealerController@NewOrders');
-    Route::post('get/order', 'Api\DealerController@GetOrder');
+    Route::post('new/orders', 'Api\DealerController@newOrders');
+    Route::post('get/order', 'Api\DealerController@getOrder');
     Route::post('tender', 'Api\DealerController@tender');
-    Route::post('accept/orders', 'Api\DealerController@GetAcceptOrders');
+    Route::post('accept/orders', 'Api\DealerController@getAcceptOrders');
 });

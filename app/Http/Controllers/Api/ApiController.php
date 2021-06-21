@@ -4,12 +4,8 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Hall;
-use App\Unit;
 use App\User;
-use App\Zone;
 use App\Order;
-use App\Vehicle;
-use App\OrderItem;
 use App\OrderTender;
 use App\Events\NewOrder;
 use Illuminate\Http\Request;
@@ -23,7 +19,6 @@ class ApiController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
-        //, ['only' => ['orders']]
     }
 
     /**
@@ -42,7 +37,7 @@ class ApiController extends Controller
         return response()->json($hall);
     }
 
-    public function StoreOrder(Request $request) {
+    public function storeOrder(Request $request) {
 
         $validator = Validator::make($request->all(), [
             'name'              => 'string | max:100',
@@ -96,12 +91,12 @@ class ApiController extends Controller
         return response()->json($order);
     }
 
-    public function GetOrders(Request $request) {
+    public function getOrders(Request $request) {
         $orders = Order::whereStatus('0')->where('user_add_id', $request->user_id)->orderBy('created_at' , 'DESC')->get();
         return response()->json($orders);
     }
 
-    public function GetOrder(Request $request) {
+    public function getOrder(Request $request) {
         $order = Order::with('tendres')->where('id', $request->order_id)->first();
         return response()->json($order);
     }

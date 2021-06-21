@@ -1978,6 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     window.Echo.channel("new-order").listen("NewOrder", function (e) {
+      console.log('data');
       var audio = new Audio('http://soundbible.com/mp3/heavy-rain-daniel_simon.mp3');
       audio.play();
 

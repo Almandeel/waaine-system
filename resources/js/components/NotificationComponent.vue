@@ -32,6 +32,7 @@
         },
         mounted () {
             window.Echo.channel("new-order").listen("NewOrder", e => {
+                console.log('data')
                 let audio = new Audio('http://soundbible.com/mp3/heavy-rain-daniel_simon.mp3');
                 audio.play();
                 this.fetch();
